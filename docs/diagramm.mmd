@@ -1,8 +1,7 @@
 erDiagram
   USERS ||--o{ HABITS : "creates"
-  USERS ||--o{ TASKS : "creates"
+  USERS ||--o{ TASKS : "asigned_to"
   USERS ||--o{ WORKSPACES : "owns"
-  USERS ||--o{ HABIT_COMPLETIONS : "completes"
   USERS |o--o{ CATEGORIES : "owns"
   USERS ||--o{ WORKSPACE_MEMBERS : "belongs_to"
 
@@ -11,6 +10,7 @@ erDiagram
   WORKSPACES |o--o{ CATEGORIES : "contains"
 
   HABITS ||--o{ HABIT_COMPLETIONS : "tracks"
+
   HABITS ||--o{ HABIT_CATEGORIES : "categorized_by"
   CATEGORIES ||--o{ HABIT_CATEGORIES : "applies_to"
 
@@ -44,8 +44,7 @@ erDiagram
   HABIT_COMPLETIONS {
     int id PK
     int habit_id FK
-    int user_id FK
-    date completion_date
+    timestamp completed_at
     string status
     text notes
   }
@@ -62,6 +61,7 @@ erDiagram
     timestamp created_at
     timestamp deadline
     timestamp deleted_at
+    timestamp updated_at
   }
 
   CATEGORIES {
