@@ -1,0 +1,94 @@
+erDiagram
+  USER ||--o{ HABITS : ""
+  USER ||--o{ TASKS : ""
+  USER ||--o{ WORKSPACES : ""
+  USER ||--o{ HABITCOMPLETIONS : ""
+  USER ||--o{ CATEGORY : ""
+  USER ||--o{ WORKSPACEMEMBERS : ""
+
+ HABITS ||--o{ HABITCOMPLETIONS : ""
+
+  TASKS ||--o{ TASKCATEGORIES : ""
+  HABITS ||--o{ HABITCATEGORIES : ""
+
+  CATEGORY ||--o{ TASKCATEGORIES : ""
+  CATEGORY ||--o{ HABITCATEGORIES : ""
+
+  WORKSPACES ||--o{ WORKSPACEMEMBERS : ""
+  WORKSPACES ||--o{ TASKS : ""
+
+  USER {
+    int id PK
+    str name 
+    str nickname 
+    int number
+    str password 
+    str email 
+    str timezone
+  }
+
+  HABITS {
+    int id PK
+    str name 
+    text description
+    int creator_id FK
+    str timezone
+    str status 
+    str created_at 
+    str start_date
+    str end_date
+  }
+
+  HABITCOMPLETIONS {
+    int id PK
+    int habit_id FK
+    int user_id FK
+    str completion_date
+    str status  
+  }
+
+  TASKS {
+    int id PK
+    str name 
+    text description
+    str status 
+    int priority 
+    str created_at 
+    str deadline
+    int creator_id FK
+    int workspace_id FK
+  }
+
+  CATEGORY {
+    int id PK
+    str name 
+    str color
+    int owner_id FK
+  }
+  
+  WORKSPACES {
+    int id PK
+    str name 
+    int owner_id FK
+    str start_date 
+  }
+  
+  WORKSPACEMEMBERS {
+    int id PK
+    int user_id FK
+    int workspace_id FK
+    str role 
+    str join_date
+  }
+
+  TASKCATEGORIES {
+    int id PK
+    int task_id FK
+    int category_id FK
+  }
+
+  HABITCATEGORIES {
+    int id PK
+    int habit_id FK
+    int category_id FK
+  }
