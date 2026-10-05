@@ -1,94 +1,102 @@
 erDiagram
-  USER ||--o{ HABITS : ""
-  USER ||--o{ TASKS : ""
-  USER ||--o{ WORKSPACES : ""
-  USER ||--o{ HABITCOMPLETIONS : ""
-  USER ||--o{ CATEGORY : ""
-  USER ||--o{ WORKSPACEMEMBERS : ""
+  USERS ||--o{ HABITS : "creates"
+  USERS ||--o{ TASKS : "creates"
+  USERS ||--o{ WORKSPACES : "owns"
+  USERS ||--o{ HABIT_COMPLETIONS : "completes"
+  USERS |o--o{ CATEGORIES : "owns"
+  USERS ||--o{ WORKSPACE_MEMBERS : "belongs_to"
 
- HABITS ||--o{ HABITCOMPLETIONS : ""
+  WORKSPACES ||--o{ WORKSPACE_MEMBERS : "has"
+  WORKSPACES |o--o{ TASKS : "contains"
+  WORKSPACES |o--o{ CATEGORIES : "contains"
 
-  TASKS ||--o{ TASKCATEGORIES : ""
-  HABITS ||--o{ HABITCATEGORIES : ""
+  HABITS ||--o{ HABIT_COMPLETIONS : "tracks"
+  HABITS ||--o{ HABIT_CATEGORIES : "categorized_by"
+  CATEGORIES ||--o{ HABIT_CATEGORIES : "applies_to"
 
-  CATEGORY ||--o{ TASKCATEGORIES : ""
-  CATEGORY ||--o{ HABITCATEGORIES : ""
+  TASKS ||--o{ TASK_CATEGORIES : "categorized_by"
+  CATEGORIES ||--o{ TASK_CATEGORIES : "applies_to"
 
-  WORKSPACES ||--o{ WORKSPACEMEMBERS : ""
-  WORKSPACES ||--o{ TASKS : ""
-
-  USER {
+  USERS {
     int id PK
-    str name 
-    str nickname 
-    int number
-    str password 
-    str email 
-    str timezone
+    string name
+    string nickname 
+    string phone_number 
+    string password
+    string email
+    string timezone
+    timestamp created_at
   }
 
   HABITS {
     int id PK
-    str name 
+    string name
     text description
     int creator_id FK
-    str timezone
-    str status 
-    str created_at 
-    str start_date
-    str end_date
+    string timezone
+    string status
+    date start_date
+    date end_date
+    timestamp created_at
+    timestamp deleted_at
   }
 
-  HABITCOMPLETIONS {
+  HABIT_COMPLETIONS {
     int id PK
     int habit_id FK
     int user_id FK
-    str completion_date
-    str status  
+    date completion_date
+    string status
+    text notes
   }
 
   TASKS {
     int id PK
-    str name 
+    string name
     text description
-    str status 
-    int priority 
-    str created_at 
-    str deadline
+    string status
+    int priority
     int creator_id FK
+    int assignee_id FK
     int workspace_id FK
+    timestamp created_at
+    timestamp deadline
+    timestamp deleted_at
   }
 
-  CATEGORY {
+  CATEGORIES {
     int id PK
-    str name 
-    str color
+    string name
+    string color
     int owner_id FK
+    int workspace_id FK
+    timestamp created_at
+    timestamp deleted_at
   }
   
   WORKSPACES {
     int id PK
-    str name 
+    string name
+    text description
     int owner_id FK
-    str start_date 
-  }
-  
-  WORKSPACEMEMBERS {
-    int id PK
+    timestamp created_at
+
+  WORKSPACE_MEMBERS {
     int user_id FK
     int workspace_id FK
-    str role 
-    str join_date
+    string role
+    timestamp joined_at
   }
 
-  TASKCATEGORIES {
+  TASK_CATEGORIES {
     int id PK
     int task_id FK
     int category_id FK
   }
 
-  HABITCATEGORIES {
+  HABIT_CATEGORIES {
     int id PK
     int habit_id FK
     int category_id FK
   }
+}
