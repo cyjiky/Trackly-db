@@ -33,17 +33,17 @@ Trackly - сервіс трекінгу звичок та управління �
 
 ### Концептуальний дизайн
 
-- Сутності: Habits, Tasks, Workspaces, User, Category, HabitCompletions, WorkspaceMembers
-- Атрибути: 
-  - Habits: id, name, description, creator, timetable, status, created_at, start_date, end_date
-  - HabitCompletions: id, habit_id, user_id, completion_date, status 
-  - Tasks: id, name, description, status, priority, created_at, deadline, creator, workspace
-  - User: id, name, nick_name, number, password, email, timezone
-  - Category: id, name, color, owner 
-  - Workspaces: id, name, owner, start_date
-  - WorkspaceMembers: id, user_id, workspace_id, role, join_date
-  - TaskCategories: id, task_id, category_id
-  - HabitCategories: id, habit_id, category_id
+- Сутності: Users, Habits, HabitCompletions, Tasks, Workspaces, WorkspaceMembers, Categories, TaskCategories, HabitCategories
+- Атрибути:
+  - Users: id, name, nickname, phone_number, password, email, timezone, created_at
+  - Habits: id, name, description, creator_id, timezone, status, start_date, end_date, created_at, deleted_at
+  - HabitCompletions: id, habit_id, completed_at, note
+  - Tasks: id, name, description, status, priority, creator_id, assignee_id, workspace_id, created_at, deadline, deleted_at, updated_at
+  - Categories: id, name, color, owner_id, workspace_id, created_at, deleted_at
+  - Workspaces: id, name, description, owner_id, created_at
+  - WorkspaceMembers: user_id, workspace_id, role, joined_at
+  - TaskCategories: task_id, category_id
+  - HabitCategories: habit_id, category_id
 
 
 #### Бізнес-зв'язки

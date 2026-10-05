@@ -1,8 +1,8 @@
 erDiagram
   USERS ||--o{ HABITS : "creates"
+  USERS |o--o{ TASKS : "asigned_to"
   USERS ||--o{ TASKS : "creates"
   USERS ||--o{ WORKSPACES : "owns"
-  USERS ||--o{ HABIT_COMPLETIONS : "completes"
   USERS |o--o{ CATEGORIES : "owns"
   USERS ||--o{ WORKSPACE_MEMBERS : "belongs_to"
 
@@ -11,6 +11,7 @@ erDiagram
   WORKSPACES |o--o{ CATEGORIES : "contains"
 
   HABITS ||--o{ HABIT_COMPLETIONS : "tracks"
+
   HABITS ||--o{ HABIT_CATEGORIES : "categorized_by"
   CATEGORIES ||--o{ HABIT_CATEGORIES : "applies_to"
 
@@ -31,37 +32,36 @@ erDiagram
   HABITS {
     int id PK
     string name
-    text description
+    text description "Nullable"
     int creator_id FK
     string timezone
     string status
     date start_date
     date end_date
     timestamp created_at
-    timestamp deleted_at
+    timestamp deleted_at "Nullable"
   }
 
   HABIT_COMPLETIONS {
     int id PK
     int habit_id FK
-    int user_id FK
-    date completion_date
-    string status
-    text notes
+    timestamp completed_at
+    text note "Nullable"
   }
 
   TASKS {
     int id PK
     string name
-    text description
+    text description "Nullable"
     string status
-    int priority
+    int priority "Nullable"
     int creator_id FK
-    int assignee_id FK
-    int workspace_id FK
+    int assignee_id FK "Nullable"
+    int workspace_id FK "Nullable"
     timestamp created_at
-    timestamp deadline
-    timestamp deleted_at
+    timestamp deadline "Nullable"
+    timestamp deleted_at "Nullable"
+    timestamp updated_at
   }
 
   CATEGORIES {
@@ -69,34 +69,32 @@ erDiagram
     string name
     string color
     int owner_id FK
-    int workspace_id FK
+    int workspace_id FK "Nullable"
     timestamp created_at
-    timestamp deleted_at
+    timestamp deleted_at "Nullable"
   }
   
   WORKSPACES {
     int id PK
     string name
-    text description
+    text description "Nullable"
     int owner_id FK
     timestamp created_at
   }
 
   WORKSPACE_MEMBERS {
-    int user_id FK
-    int workspace_id FK
+    int user_id FK, PK
+    int workspace_id FK, PK
     string role
     timestamp joined_at
   }
 
   TASK_CATEGORIES {
-    int id PK
-    int task_id FK
-    int category_id FK
+    int task_id FK, PK
+    int category_id FK, PK
   }
 
   HABIT_CATEGORIES {
-    int id PK
-    int habit_id FK
-    int category_id FK
+    int habit_id FK, PK
+    int category_id FK, PK
   }
