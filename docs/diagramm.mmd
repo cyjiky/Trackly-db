@@ -70,7 +70,7 @@ erDiagram
     string name
     string color
     int owner_id FK
-    int workspace_id FK
+    int workspace_id FK "Nullable"
     timestamp created_at
     timestamp deleted_at "Nullable"
   }
@@ -84,8 +84,8 @@ erDiagram
   }
 
   WORKSPACE_MEMBERS {
-    int user_id FK
-    int workspace_id FK
+    int user_id FK, PK
+    int workspace_id FK, PK
     string role
     timestamp joined_at
   }
