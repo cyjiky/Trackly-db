@@ -90,13 +90,11 @@ erDiagram
   }
 
   TASK_CATEGORIES {
-    int id PK
-    int task_id FK
-    int category_id FK
+    int task_id FK, PK
+    int category_id FK, PK
   }
 
   HABIT_CATEGORIES {
-    int id PK
-    int habit_id FK
-    int category_id FK
+    int habit_id FK, PK
+    int category_id FK, PK
   }
