@@ -3,16 +3,17 @@ erDiagram
   USERS ||--o{ TASKS : "creates"
   USERS ||--o{ TASKS : "assigned_to"
   USERS ||--o{ WORKSPACES : "owns"
-  USERS ||--o{ CATEGORIES : "owns"
+  USERS ||--o{ TASK_CATEGORIES : "owns"
+  USERS ||--o{ HABITS_CATEGORIES : "owns"
   USERS ||--o{ WORKSPACE_MEMBERS : "participates_as"
 
   WORKSPACES ||--|{ WORKSPACE_MEMBERS : "has"
   WORKSPACES ||--o{ TASKS : "contains"
-  WORKSPACES ||--o{ CATEGORIES : "contains"
+  WORKSPACES ||--o{ TASK_CATEGORIES : "contains"
 
   HABITS ||--o{ HABIT_COMPLETIONS : "tracks"
-  CATEGORIES ||--o{ TASKS : "classifies"
-  CATEGORIES ||--o{ HABITS : "classifies"
+  TASK_CATEGORIES ||--o{ TASKS : "classifies"
+  HABITS_CATEGORIES ||--o{ HABITS : "classifies"
 
   USERS {
     int id PK
@@ -23,6 +24,7 @@ erDiagram
     string email 
     string timezone
     timestamp created_at
+    timestamp updated_at
   }
 
   HABITS {
@@ -30,23 +32,25 @@ erDiagram
     int creator_id FK
     int category_id FK
     string name 
-    string description
-    string frequency_days
+    text description
+    int[] frequency_days "ISO days: [1, 2, 3, 4, 5, 6, 7]"
     string timezone
-    string status
+    string status "ACTIVE | PAUSED | ARCHIVED | DRAFT | DROPPED | FAILED"
     date start_day 
     date end_day 
     timestamp created_at
     timestamp deleted_at
+    timestamp updated_at
   }
 
   HABIT_COMPLETIONS {
     int id PK
     int habit_id FK
     date local_date
+    int actual_value
     timestamp completed_at
-    string note 
-    string status 
+    text note 
+    string status "COMPLETED | SKIPPED | MISSED | PARTIALLY_COMPLETED"
   }
 
   TASKS {
@@ -56,9 +60,9 @@ erDiagram
     int workspace_id FK
     int category_id FK
     string name
-    string description
+    text description
     string timezone
-    string status
+    string status "OPEN | IN_PROGRESS | DONE | CLOSED | CANCELLED"
     int priority
     timestamp deadline 
     timestamp created_at
@@ -66,28 +70,39 @@ erDiagram
     timestamp deleted_at 
   }
 
-  CATEGORIES {
+  TASK_CATEGORIES {
     int id PK
-    int owner_id FK
     int workspace_id FK
     string name
     string color
     timestamp created_at
-    timestamp deleted_at 
+    timestamp deleted_at
+    timestamp updated_at
+  }
+
+  HABITS_CATEGORIES {
+    int id PK
+    int user_id FK
+    string name
+    string color
+    timestamp created_at
+    timestamp deleted_at
+    timestamp updated_at
   }
 
   WORKSPACES {
     int id PK
     int owner_id FK
     string name 
-    string description
-    string status
+    text description 
+    string status "ACTIVE | ARCHIVED | SUSPENDED"
     timestamp created_at
   }
 
   WORKSPACE_MEMBERS {
     int user_id PK,FK
     int workspace_id PK,FK
-    string role
+    string role "ADMIN | OWNER | MEMBER | GUEST"
+    string status "ACTIVE | INVITED | DEACTIVATED | ARCHIVED"
     timestamp joined_at
   }
