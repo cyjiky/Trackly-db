@@ -1,0 +1,6 @@
+CREATE TABLE habit_completions (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    habit_id BIGINT REFERENCES habits (id) ON DELETE CASCADE,
+    completed_at TIMESTAMP DEFAULT now() AT TIME ZONE 'UTC',
+    note TEXT NULL
+)
