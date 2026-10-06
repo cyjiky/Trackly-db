@@ -37,11 +37,10 @@ Trackly - сервіс трекінгу звичок та управління �
   - **Habits**: id, name, description, frequency_days, creator_id, timezone, status, start_date, end_date, created_at, deleted_at, updated_at
   - **HabitCompletions**: id, habit_id, local_date, completed_at, note, actual_value
   - **Tasks**: id, name, description, timezone, status, priority, creator_id, assignee_id, workspace_id, deadline, created_at, deleted_at, updated_at
-  - **Categories**: id, name, color, owner_id, workspace_id, created_at, deleted_at
   - **Workspaces**: id, name, description, owner_id, created_at, status
   - **WorkspaceMembers**: user_id, workspace_id, role, joined_at
-  - **TaskCategories**: task_id, category_id
-  - **HabitCategories**: habit_id, category_id
+  - **TaskCategories**: task_id, workspace_id, name, color, created_at, deleted_at, update_at
+  - **HabitCategories**: habit_id, user_id, name, color, created_at, deleted_at, update_at
 
 #### Бізнес-зв'язки
 
