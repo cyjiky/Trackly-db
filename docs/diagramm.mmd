@@ -12,8 +12,8 @@ erDiagram
   WORKSPACES ||--o{ TASK_CATEGORIES : "contains"
 
   HABITS ||--o{ HABIT_COMPLETIONS : "tracks"
-  TASK_CATEGORIES ||--o{ TASKS : "classifies"
-  HABITS_CATEGORIES ||--o{ HABITS : "classifies"
+  TASK_CATEGORIES |o--o{ TASKS : "classifies"
+  HABITS_CATEGORIES |o--o{ HABITS : "classifies"
 
   USERS {
     int id PK
