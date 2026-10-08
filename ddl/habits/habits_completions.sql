@@ -1,7 +1,7 @@
 CREATE TABLE habit_completions (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     habit_id BIGINT REFERENCES habits (id) ON DELETE CASCADE,
-    local_date TIMESTAMPTZ NOT NULL, -- the timezone can be accessed via habits table --
+    local_timestamp TIMESTAMPTZ NOT NULL, -- the timezone can be accessed via habits table --
     completed_at TIMESTAMPTZ DEFAULT now(),
     actual_value SMALLINT NULL,
     note TEXT NULL,

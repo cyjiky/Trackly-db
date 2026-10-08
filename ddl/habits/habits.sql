@@ -5,12 +5,13 @@ CREATE TABLE habits (
     creator_id BIGINT NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     category_id BIGINT NULL REFERENCES habits_categories (id) ON DELETE SET NULL,
     timezone VARCHAR(32) NOT NULL DEFAULT 'Etc/UTC', -- IANA tz format --
-    frequency_days SMALLINT[7] NOT NULL DEFAULT ARRAY[1, 2, 3, 4, 5, 6, 7],
+    -- array_length(frequency_days, 1), where 1 stands for array dimension which length the function computes --
+    frequency_days SMALLINT[] NOT NULL DEFAULT ARRAY[1, 2, 3, 4, 5, 6, 7] CHECK (1 <= array_length(frequency_days, 1) <= 7),
     status VARCHAR(16) NOT NULL DEFAULT 'ACTIVE',
     start_day DATE NULL,
     end_day DATE NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ NULL,
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now() 
 );
 
