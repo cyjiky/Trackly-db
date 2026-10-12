@@ -1,5 +1,9 @@
-CREATE Table task_categories (
-    tasks_id BIGINT REFERENCES tasks(id) ON DELETE CASCADE, 
-    categories_id BIGINT REFERENCES categories(id) ON DELETE CASCADE, 
-    PRIMARY KEY (tasks_id, categories_id)
+CREATE TABLE task_categories (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    workspace_id BIGINT REFERENCES workspaces(id) ON DELETE CASCADE, 
+    name VARCHAR(100), 
+    color VARCHAR(8) NOT NULL DEFAULT '#f8f8f8',
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    deleted_at TIMESTAMP, 
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
