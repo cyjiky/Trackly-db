@@ -8,11 +8,11 @@
 |  #  | Назва лабораторної роботи                   |     Посилання     |
 | :-: | :------------------------------------------ | :---------------: |
 |  1  | Збір вимог та розробка схеми ER             | [Lab1](./Lab1.md) |
-|  2  | Перетворення ER-діаграми у схему PostgreSQL |        ---        |
-|  3  | SQL OLTP - маніпулювання даними             |        ---        |
-|  4  | SQL OLAP - аналітичні запити                |        ---        |
-|  5  | Нормалізація баз даних                      |        ---        |
-|  6  | Міграції схем (Prisma ORM)                  |        ---        |
+|  2  | Перетворення ER-діаграми у схему PostgreSQL | [Lab2](./Lab2.md) |
+|  3  | SQL OLTP - маніпулювання даними             | [Lab3](./Lab3.md) |
+|  4  | SQL OLAP - аналітичні запити                | [Lab4](./Lab4.md) |
+|  5  | Нормалізація баз даних                      | [Lab5](./Lab5.md) |
+|  6  | Міграції схем (Prisma ORM)                  | [Lab6](./Lab6.md) |
 
 ## Модель розгалуження Git (Branching Strategy)
 
@@ -96,8 +96,12 @@ gitGraph
     checkout docs
     commit
 
-    merge docs_yr
+    branch docs_vu
     commit
+    checkout docs
+
+    merge docs_yr
+    merge docs_vu
     checkout main
     merge docs
 ```
@@ -144,9 +148,9 @@ gitGraph
     branch dev
     checkout dev
     commit id: "Lab2"
-    commit id: "Lab3"
+    commit id: "Lab-N (3-6)"
 
-    branch lab-3
+    branch lab-N
     commit
 
     branch dev_vu
@@ -162,14 +166,14 @@ gitGraph
     checkout dev_kp
     commit
 
-    checkout lab-3
+    checkout lab-N
     merge dev_yr
     merge dev_vu
     merge dev_kp
     commit id: "Update README"
 
     checkout dev
-    merge lab-3
+    merge lab-N
 
     checkout main
     merge dev
