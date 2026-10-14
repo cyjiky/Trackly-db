@@ -4,7 +4,7 @@ CREATE TABLE workspaces (
     name VARCHAR(100) NOT NULL,
     description TEXT,
     status VARCHAR(50) NOT NULL DEFAULT 'ACTIVE' CHECK (status IN ('ACTIVE', 'ARCHIVED', 'SUSPENDED')),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (owner_id) REFERENCES users(id)
 );
