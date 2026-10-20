@@ -11,9 +11,9 @@
 
 | Комміт/PR | Автор |
 | --------- | ----- |
-| [PR]()    | ----- |
-| [PR]()    | ----- |
-| [PR]()    | ----- |
+| [PR](https://github.com/cyjiky/Trackly-db/commit/328b5952a34df2a2f0c8ffe6a3a532fd3fb1a5f7)    | Єгор Романов |
+| [PR](https://github.com/cyjiky/Trackly-db/commit/855f4733806f59bbdb43e740e1d5f228ab47ec66)    | Вікторія Уманець |
+| [PR]()    | Прокопцов Кірілл |
 
 
 ### Корисні посилання

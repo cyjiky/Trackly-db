@@ -1,4 +1,4 @@
-CREATE TABLE habits (
+CREATE TABLE IF NOT EXISTS habits (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(256) NOT NULL,
     description TEXT NULL,
@@ -10,11 +10,10 @@ CREATE TABLE habits (
         array_ndims(frequency_days) = 1 AND
         cardinality(frequency_days) BETWEEN  1 AND 7
     ),
-    status VARCHAR(16) NOT NULL DEFAULT 'ACTIVE',
+    status VARCHAR(16) NOT NULL DEFAULT 'ACTIVE' CHECK (status IN ('ACTIVE', 'PAUSED', 'ARCHIVED', 'DRAFT', 'DROPPED', 'FAILED')),
     start_day DATE NULL,
     end_day DATE NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ NULL,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now() 
 );
-
