@@ -1,4 +1,4 @@
-CREATE TABLE workspace_members (
+CREATE TABLE IF NOT EXISTS workspace_members (
     user_id BIGINT NOT NULL,
     workspace_id BIGINT NOT NULL,
     role VARCHAR(50) NOT NULL DEFAULT 'MEMBER' CHECK (role IN ('ADMIN', 'OWNER', 'MEMBER', 'GUEST')),
