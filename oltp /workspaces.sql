@@ -1,24 +1,26 @@
-
---- INSERT --- 
-INSERT INTO workspaces (owner_id,name)
-VALUES (1 , 'STUDY');
-
-INSERT INTO workspaces (owner_id,name,description,status)
-VALUES (2, 'Ivan','Text','ACTIVE');
-
---- UPDATE --- 
-
-UPDATE workspaces
-    SET name = 'KIRILL'
-    WHERE id = 4;
-
---- DELETE --- 
-
-DELETE FROM workspaces
-    WHERE id = 1;
-
---- SELECT --- 
-    
+--- SELECT ---
 SELECT * FROM workspaces;
+SELECT id, name, status, owner_id FROM workspaces;
 
-SELECT * FROM workspace_members WHERE user_id = 3; 
+--- INSERT ---
+INSERT INTO workspaces (owner_id, name, description, status) 
+VALUES (1, 'Marketing', 'Market', 'ACTIVE');
+
+INSERT INTO workspaces (owner_id, name, description, status) 
+VALUES (2, 'Design', 'Desing project', 'ACTIVE');
+
+--- UPDATE ---
+UPDATE workspaces 
+SET name = 'Personal & Side Projects', status = 'ACTIVE' 
+WHERE id = 1;
+
+UPDATE workspaces 
+SET description = 'Test text ' 
+WHERE id = 2;
+
+--- DELETE ---
+DELETE FROM workspaces 
+WHERE id = 2;
+
+DELETE FROM workspaces 
+WHERE status = 'SUSPENDED';
