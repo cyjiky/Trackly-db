@@ -1,7 +1,7 @@
 
 --- INSERT --- 
 INSERT INTO workspace_members (user_id)
-    VALUES (1 , 'STUDY');
+    VALUES (1);
 
 INSERT INTO workspace_members (user_id, workspace_id, role, status)
     VALUES (1, 4, 'ADMIN', 'ACTIVE');
@@ -17,7 +17,7 @@ UPDATE workspace_members
 --- DELETE --- 
 
 DELETE FROM workspace_members
-    WHERE id = 4;
+    WHERE workspace_id = 4;
 
 DELETE FROM workspace_members 
     WHERE user_id = 1 AND workspace_id = 3;
