@@ -1,23 +1,21 @@
 
 --- INSERT --- 
-INSERT INTO workspace_members (user_id)
-    VALUES (1);
-
 INSERT INTO workspace_members (user_id, workspace_id, role, status)
-    VALUES (1, 4, 'ADMIN', 'ACTIVE');
+    VALUES (2, 1, 'ADMIN', 'ACTIVE');
+
 --- UPDATE --- 
-UPDATE workspace_members
-    SET role = 'GUEST'
-    WHERE id = 1;
+-- UPDATE workspace_members
+--     SET role = 'GUEST'
+--     WHERE id = 1;
 
 UPDATE workspace_members 
     SET role = 'OWNER' 
-    WHERE user_id = 1 AND workspace_id = 3;
+    WHERE user_id = 2 AND workspace_id = 1;
 
 --- DELETE --- 
 
-DELETE FROM workspace_members
-    WHERE workspace_id = 4;
+-- DELETE FROM workspace_members
+--     WHERE workspace_id = 4;
 
 DELETE FROM workspace_members 
     WHERE user_id = 1 AND workspace_id = 3;

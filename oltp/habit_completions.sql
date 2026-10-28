@@ -5,7 +5,7 @@ INSERT INTO habit_completions (
 )
 VALUES
     (
-        1, CURRENT_DATE + TIME '07:30:00',
+        3, CURRENT_DATE + TIME '07:30:00',
         CURRENT_TIMESTAMP, 35, 'Ran 5 kilometers', 'COMPLETED'
     ),
     (
@@ -31,20 +31,20 @@ WHERE habit_id = 1 AND status = 'COMPLETED';
 
 UPDATE habit_completions
 SET actual_value = 40, note = 'Ran 6 kilometers'
-WHERE habit_id = 1 AND local_timestamp = CURRENT_DATE + TIME '07:30:00'
+WHERE habit_id = 3 AND local_timestamp = CURRENT_DATE + TIME '07:30:00'
 RETURNING *;
 
-UPDATE habit_completions
-SET status = 'SKIPPED', actual_value = NULL, note = 'Skipped today'
-WHERE habit_id = 1 AND local_timestamp = CURRENT_DATE + TIME '07:30:00'
-RETURNING *;
+-- UPDATE habit_completions
+-- SET status = 'SKIPPED', actual_value = NULL, note = 'Skipped today'
+-- WHERE habit_id = 1 AND local_timestamp = CURRENT_DATE + TIME '07:30:00'
+-- RETURNING *;
 
 SELECT * FROM habits; -- Inspect the changes --
 
 --- DELETE ---
 
 DELETE FROM habit_completions
-WHERE habit_id = 1 AND local_timestamp = CURRENT_DATE + TIME '07:30:00'
+WHERE habit_id = 3 AND local_timestamp = CURRENT_DATE + TIME '07:30:00'
 RETURNING *;
 
 SELECT * FROM habits; -- Inspect the changes --
