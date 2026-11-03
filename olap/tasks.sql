@@ -26,22 +26,19 @@ SELECT COUNT(id), status
 	HAVING COUNT(id) > 2;
 
 -- LEFT JOIN --
-SELECT tasks.id, tasks.name, priority, tasks.category_id
-	FROM tasks 
-	LEFT JOIN task_categories ON tasks.category_id = task_categories.id
-	ORDER BY tasks.category_id;
+SELECT t.id, t.name, t.priority, t.category_id, tc.color
+	FROM tasks AS t 
+	LEFT JOIN task_categories AS tc ON t.category_id = tc.id
+	ORDER BY t.category_id;
 
 -- RIGHT JOIN -- 
-SELECT task_categories.id, task_categories.name
-	FROM task_categories
-	RIGHT JOIN tasks ON task_categories.id = tasks.category_id
-	ORDER BY tasks.category_id;
-
-SELECT DISTINCT task_categories.id, task_categories.name 
-	FROM task_categories
-	RIGHT JOIN tasks ON task_categories.id = tasks.category_id;
+SELECT t.id, t.name, t.priority, u.id, u.name, u.email
+	FROM tasks AS t
+	RIGHT JOIN users AS u ON t.creator_id = u.id
+	ORDER BY u.id;
 
 -- FULL JOIN --
-SELECT tasks.id, tasks.name, tasks.priority, tasks.category_id
-	FROM tasks
-	FULL JOIN task_categories ON tasks.category_id = task_categories.id;
+SELECT t.name, t.status, u.id, u.name
+	FROM tasks AS t
+	FULL JOIN users AS u ON t.creator_id = u.id 
+	ORDER BY u.id;
