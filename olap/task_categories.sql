@@ -11,31 +11,26 @@ SELECT DISTINCT name
 	ORDER BY name ASC;
 
 -- INNER JOIN --
-SELECT task_categories.id, task_categories.name, user_id -- user_id == task_categories.creator_id
-	FROM task_categories
-	INNER JOIN tasks ON task_categories.user_id = tasks.creator_id
-	ORDER BY user_id ASC;
+SELECT u.id, u.name, u.email, t.id AS task_id, t.name, t.status, tc.id AS tc_id, tc.name
+	FROM task_categories AS tc
+	INNER JOIN tasks AS t ON tc.id = t.category_id
+	INNER JOIN users AS u ON tc.user_id = u.id
+	ORDER BY tc.id ASC;
 
-SELECT *
-	FROM task_categories
-	INNER JOIN tasks ON task_categories.workspace_id = tasks.workspace_id;
+SELECT w.name, w.status, tc.*
+	FROM task_categories AS tc 
+	INNER JOIN workspaces AS w ON tc.workspace_id = w.id;
 
--- LEFT JOIN --
-SELECT *
-	FROM task_categories
-	LEFT JOIN tasks ON task_categories.workspace_id = tasks.workspace_id;
-
+-- LEFT JOIN --> TODO
+SELECT 
+	u.id AS user_id, u.name, u.email, 
+	t.id AS task_id, t.name AS task_name, 
+	tc.id AS tc_id, tc.name AS tc_name, tc.color
+	FROM tasks AS t 
+	LEFT JOIN task_categories AS tc 
+		ON tc.id = t.category_id;
+		
 -- RIGHT JOIN --
-SELECT *
-	FROM task_categories
-	RIGHT JOIN tasks ON task_categories.workspace_id = tasks.workspace_id;
-
--- FULL JOIN --
-SELECT *
-	FROM task_categories
-	FULL JOIN tasks ON task_categories.workspace_id = tasks.workspace_id;
-
--- CROSS JOIN -- 
-SELECT *
-	FROM task_categories
-	CROSS JOIN tasks;
+SELECT u.id AS user_id, u.name, u.email, tc.id, tc.name, tc.color
+	FROM task_categories AS tc 
+	RIGHT JOIN users AS u ON tc.user_id = u.id;

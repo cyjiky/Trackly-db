@@ -31,6 +31,16 @@ SELECT t.id, t.name, t.priority, t.category_id, tc.color
 	LEFT JOIN task_categories AS tc ON t.category_id = tc.id
 	ORDER BY t.category_id;
 
+SELECT 
+	u.id AS user_id, u.name, u.email, 
+	t.id AS task_id, t.name AS task_name, 
+	tc.id AS tc_id, tc.name AS tc_name, tc.color
+	FROM tasks AS t 
+	LEFT JOIN task_categories AS tc 
+		ON tc.id = t.category_id
+	LEFT JOIN users AS u
+		ON u.id = t.assignee_id;
+
 -- RIGHT JOIN -- 
 SELECT t.id, t.name, t.priority, u.id, u.name, u.email
 	FROM tasks AS t
