@@ -21,14 +21,24 @@ SELECT w.name, w.status, tc.*
 	FROM task_categories AS tc 
 	INNER JOIN workspaces AS w ON tc.workspace_id = w.id;
 
--- LEFT JOIN --> TODO
+-- LEFT JOIN
 SELECT 
-	u.id AS user_id, u.name, u.email, 
-	t.id AS task_id, t.name AS task_name, 
-	tc.id AS tc_id, tc.name AS tc_name, tc.color
-	FROM tasks AS t 
-	LEFT JOIN task_categories AS tc 
-		ON tc.id = t.category_id;
+	u.id, u.name, 
+	COUNT (
+		DISTINCT 
+		CASE 
+			WHEN u.id = w.owner_id 
+			THEN w.id
+			ELSE NULL
+		END
+	) AS total_workspaces, 
+	COUNT(DISTINCT tc.id) AS total_categories
+FROM task_categories AS tc 
+LEFT JOIN users AS u ON 
+	tc.user_id = u.id
+INNER JOIN workspaces AS w ON 
+	tc.workspace_id = w.id 
+GROUP BY u.id, u.name;
 		
 -- RIGHT JOIN --
 SELECT u.id AS user_id, u.name, u.email, tc.id, tc.name, tc.color
